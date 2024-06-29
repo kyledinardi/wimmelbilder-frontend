@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import convention from '../img/convention.webp';
 import musicFestival from '../img/music-festival.webp';
 import undergroundLab from '../img/underground-lab.webp';
@@ -9,15 +10,21 @@ function Home() {
       <div>
         <div>
           <h3>Convention</h3>
-          <img src={convention} alt='convention' />
+          <Link to='/convention'>
+            <img src={convention} alt='convention' />
+          </Link>
         </div>
         <div>
           <h3>Music Festival</h3>
-          <img src={musicFestival} alt='music festival' />
+          <Link to='/music-festival'>
+            <img src={musicFestival} alt='music festival' />
+          </Link>
         </div>
         <div>
           <h3>Underground Lab</h3>
-          <img src={undergroundLab} alt='underground lab' />
+          <Link to='/underground-lab'>
+            <img src={undergroundLab} alt='underground lab' />
+          </Link>
         </div>
       </div>
     </>
