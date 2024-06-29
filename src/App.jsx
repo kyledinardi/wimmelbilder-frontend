@@ -1,5 +1,15 @@
+import { Outlet } from 'react-router-dom';
+import Nav from './components/Nav.jsx';
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <Nav />
+      <main>
+        <Outlet />
+      </main>
+    </>
+  );
 }
 
 export default App;
