@@ -32,9 +32,9 @@ function Counter() {
   }
 
   return (
-    <span>{`${padNumber(minutes)}:${padNumber(seconds)}:${padNumber(
+    <div>{`${padNumber(minutes)}:${padNumber(seconds)}:${padNumber(
       counter,
-    )}`}</span>
+    )}`}</div>
   );
 }
 

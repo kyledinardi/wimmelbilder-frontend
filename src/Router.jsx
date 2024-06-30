@@ -1,7 +1,7 @@
 import App from './App.jsx';
 import Home from './components/Home.jsx';
 import Convention from './components/Convention.jsx';
-import MusicFestival from './components/MusicFestival.jsx';
+import CyberpunkCity from './components/CyberpunkCity.jsx';
 import UndergroundLab from './components/UndergroundLab.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
 
@@ -12,14 +12,8 @@ const routes = [
     children: [
       { index: true, element: <Home /> },
       { path: '/convention', element: <Convention /> },
-      {
-        path: '/music-festival',
-        element: <MusicFestival />,
-      },
-      {
-        path: '/underground-lab',
-        element: <UndergroundLab />,
-      },
+      { path: '/cyberpunk-city', element: <CyberpunkCity /> },
+      { path: '/underground-lab', element: <UndergroundLab /> },
     ],
     errorElement: <ErrorPage />,
   },
