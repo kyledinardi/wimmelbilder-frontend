@@ -1,24 +1,25 @@
-import Counter from './Counter.jsx';
+import { useOutletContext } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 import undergroundLab from '../img/underground-lab.webp';
 import godzilla from '../img/godzilla.png';
-import jasonVoorhees from '../img/jason-voorhees.png';
 import r2d2 from '../img/r2d2.png';
+import waldo from '../img/waldo.png';
 
 function UndergroundLab() {
-  return (
-    <>
-      <Counter />
-      <div>
-        <img src={godzilla} alt='' />
-        <p>Godzilla</p>
-        <img src={jasonVoorhees} alt='' />
-        <p>Jason Voorhees</p>
-        <img src={r2d2} alt='' />
-        <p>R2D2</p>
-      </div>
-      <img src={undergroundLab} alt='Underground Lab' />
-    </>
-  );
+  const [setIsGame, setCharacters] = useOutletContext();
+
+  const characters = useRef([
+    { name: 'Godzilla', img: godzilla },
+    { name: 'R2D2', img: r2d2 },
+    { name: 'Waldo', img: waldo },
+  ]);
+
+  useEffect(() => {
+    setIsGame(true);
+    setCharacters(characters.current);
+  }, [setIsGame, setCharacters]);
+
+  return <img src={undergroundLab} alt='Underground Lab' />;
 }
 
 export default UndergroundLab;

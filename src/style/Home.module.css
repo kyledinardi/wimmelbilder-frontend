@@ -1,0 +1,15 @@
+.games {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.illustration {
+  max-width: 300px;
+}
+
+h1,
+h3 {
+  text-align: center;
+}
