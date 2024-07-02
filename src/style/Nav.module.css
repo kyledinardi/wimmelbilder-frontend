@@ -1,0 +1,35 @@
+.navbar {
+  background-color: #444554;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.2rem;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 20px;
+}
+
+.navbar p {
+  margin: 0;
+}
+
+.navLink {
+  color: white;
+  text-decoration: none;
+}
+
+.timer {
+  min-width: 80px;
+}
+
+.character {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.character img {
+  width: 40px;
+  height: 40px;
+}

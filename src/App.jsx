@@ -10,7 +10,7 @@ function App() {
     <>
       <Nav isGame={isGame} characters={characters} />
       <main>
-        <Outlet context={[setIsGame, setCharacters]} />
+        <Outlet context={[setIsGame, setCharacters, isGame]} />
       </main>
     </>
   );

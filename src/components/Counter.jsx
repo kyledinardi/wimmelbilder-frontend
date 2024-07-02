@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import styles from '../style/Nav.module.css';
 
 function Counter() {
   const [counter, setCounter] = useState(0);
@@ -32,9 +33,9 @@ function Counter() {
   }
 
   return (
-    <div>{`${padNumber(minutes)}:${padNumber(seconds)}:${padNumber(
-      counter,
-    )}`}</div>
+    <p className={styles.timer}>
+      {`${padNumber(minutes)}:${padNumber(seconds)}:${padNumber(counter)}`}
+    </p>
   );
 }
 

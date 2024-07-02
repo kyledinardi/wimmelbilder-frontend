@@ -1,17 +1,22 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Counter from './Counter.jsx';
+import styles from '../style/Nav.module.css';
 
 function Nav({ isGame, characters }) {
   return (
-    <nav>
-      <Link to='/'>Home</Link>
-      <Link to='/high-scores'>High Scores</Link>
+    <nav className={styles.navbar}>
+      <Link className={styles.navLink} to='/'>
+        Home
+      </Link>
+      <Link className={styles.navLink} to='/high-scores'>
+        High Scores
+      </Link>
       {isGame && (
         <>
           <Counter />
           {characters.map((character) => (
-            <div key={character.name}>
+            <div className={styles.character} key={character.name}>
               <img src={character.img} alt='' />
               <p>{character.name}</p>
             </div>

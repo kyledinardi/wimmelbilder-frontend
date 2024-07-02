@@ -1,0 +1,14 @@
+.illustrationContainer {
+  overflow: auto;
+}
+
+.fullIllustration {
+  display: block;
+  margin: auto;
+}
+
+@media (min-width: 1200px) {
+  .fullIllustration {
+    max-width: 100%;
+  }
+}

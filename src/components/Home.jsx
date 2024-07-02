@@ -1,8 +1,8 @@
 import { Link, useOutletContext } from 'react-router-dom';
 import { useEffect } from 'react';
-import convention from '../img/convention.webp';
-import cyberpunkCity from '../img/cyberpunk-city.webp';
-import undergroundLab from '../img/underground-lab.webp';
+import conventionHalf from '../img/convention-half.webp';
+import cyberpunkCityHalf from '../img/cyberpunk-city-half.webp';
+import undergroundLabHalf from '../img/underground-lab-half.webp';
 import styles from '../style/Home.module.css';
 
 function Home() {
@@ -20,19 +20,19 @@ function Home() {
         <div>
           <h3>Convention</h3>
           <Link to='/convention'>
-            <img className={styles.illustration} src={convention} alt='' />
+            <img className={styles.illustration} src={conventionHalf} alt='' />
           </Link>
         </div>
         <div>
           <h3>Cyberpunk City</h3>
           <Link to='/cyberpunk-city'>
-            <img className={styles.illustration} src={cyberpunkCity} alt='' />
+            <img className={styles.illustration} src={cyberpunkCityHalf} alt='' />
           </Link>
         </div>
         <div>
           <h3>Underground Lab</h3>
           <Link to='/underground-lab'>
-            <img className={styles.illustration} src={undergroundLab} alt='' />
+            <img className={styles.illustration} src={undergroundLabHalf} alt='' />
           </Link>
         </div>
       </div>

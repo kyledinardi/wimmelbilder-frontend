@@ -6,10 +6,13 @@
 }
 
 .illustration {
-  max-width: 300px;
+  width: 300px;
 }
 
 h1,
 h3 {
   text-align: center;
+  margin: 0;
+  padding: 25px;
 }
+
