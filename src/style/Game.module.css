@@ -1,10 +1,12 @@
 .illustrationContainer {
   overflow: auto;
+  position: relative;
 }
 
 .fullIllustration {
   display: block;
   margin: auto;
+  cursor: crosshair;
 }
 
 @media (min-width: 1200px) {

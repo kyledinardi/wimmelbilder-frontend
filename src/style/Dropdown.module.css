@@ -1,0 +1,17 @@
+.dropdown {
+  position: absolute;
+  background-color: #444554;
+  border-radius: 10px;
+}
+
+.character {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 20px;
+  color: white;
+}
+
+.character p {
+  width: max-content
+}
