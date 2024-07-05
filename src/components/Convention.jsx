@@ -9,11 +9,9 @@ import waylonSmithers from '../img/waylon-smithers.png';
 import styles from '../style/Game.module.css';
 
 function Convention() {
-  // const [top, setTop] = useState(0);
-  // const [left, setLeft] = useState(0);
-  // const [display, setDisplay] = useState('none');
   const [setIsGame, setCharacters, isGame] = useOutletContext();
   const [inlineStyles, setInlineStyles] = useState({ display: 'none' });
+  const [coordinates, setCoordinates] = useState('');
 
   const characters = useRef([
     { name: 'Benson', img: benson },
@@ -29,25 +27,31 @@ function Convention() {
 
   function handleClick(e) {
     const display = inlineStyles.display === 'none' ? 'block' : 'none';
+    let x;
+    let y;
     let top = null;
     let left = null;
     let bottom = null;
     let right = null;
 
     if (display === 'block') {
-      if (e.nativeEvent.offsetY > e.target.height - 230) {
-        bottom = e.target.height - e.nativeEvent.offsetY;
-      } else {
-        top = e.nativeEvent.offsetY;
-      }
+      x = Math.round((e.nativeEvent.offsetX / e.target.width) * 3600);
+      y = Math.round((e.nativeEvent.offsetY / e.target.height) * 2544);
 
-      if (e.nativeEvent.offsetX > e.target.width - 221) {
+      if (e.nativeEvent.offsetX > e.target.width - 195) {
         right = e.target.width - e.nativeEvent.offsetX;
       } else {
         left = e.nativeEvent.offsetX;
       }
+
+      if (e.nativeEvent.offsetY > e.target.height - 217) {
+        bottom = e.target.height - e.nativeEvent.offsetY;
+      } else {
+        top = e.nativeEvent.offsetY;
+      }
     }
 
+    setCoordinates(`${x} ${y}`);
     setInlineStyles({ display, top, left, bottom, right });
   }
 
@@ -62,7 +66,12 @@ function Convention() {
           src={convention}
           alt='Convention'
         />
-        <Dropdown characters={characters.current} inlineStyles={inlineStyles} />
+        <Dropdown
+          illustration='convention'
+          characters={characters.current}
+          inlineStyles={inlineStyles}
+          coordinates={coordinates}
+        />
       </div>
     );
   }
