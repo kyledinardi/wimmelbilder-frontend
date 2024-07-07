@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Counter from './Counter.jsx';
 import styles from '../style/Nav.module.css';
 
-function Nav({ isGame, characters }) {
+function Nav({ isGame, characters, isGameOver }) {
   return (
     <nav className={styles.navbar}>
       <Link className={styles.navLink} to='/'>
@@ -14,9 +14,14 @@ function Nav({ isGame, characters }) {
       </Link>
       {isGame && (
         <>
-          <Counter />
+          <Counter isGameOver={isGameOver} />
           {characters.map((character) => (
-            <div className={styles.character} key={character.name}>
+            <div
+              className={
+                styles.character + (character.found ? ` ${styles.found}` : '')
+              }
+              key={character.name}
+            >
               <img src={character.img} alt='' />
               <p>{character.name}</p>
             </div>
@@ -30,6 +35,7 @@ function Nav({ isGame, characters }) {
 Nav.propTypes = {
   isGame: PropTypes.bool,
   characters: PropTypes.array,
+  isGameOver: PropTypes.bool,
 };
 
 export default Nav;

@@ -1,5 +1,5 @@
 import { useOutletContext } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Dropdown from './Dropdown.jsx';
 import undergroundLab from '../img/underground-lab.webp';
 import undergroundLabHalf from '../img/underground-lab-half.webp';
@@ -9,20 +9,19 @@ import waldo from '../img/waldo.png';
 import styles from '../style/Game.module.css';
 
 function UndergroundLab() {
-  const [setIsGame, setCharacters, isGame] = useOutletContext();
+  const [setIsGame, setCharacters, isGame, characters] = useOutletContext();
   const [inlineStyles, setInlineStyles] = useState({ display: 'none' });
   const [coordinates, setCoordinates] = useState('');
 
-  const characters = useRef([
-    { name: 'Godzilla', img: godzilla },
-    { name: 'R2D2', img: r2d2 },
-    { name: 'Waldo', img: waldo },
-  ]);
-
   useEffect(() => {
     setIsGame(true);
-    setCharacters(characters.current);
     window.scrollTo(0, 0);
+
+    setCharacters([
+      { name: 'Godzilla', img: godzilla },
+      { name: 'R2D2', img: r2d2 },
+      { name: 'Waldo', img: waldo },
+    ]);
   }, [setIsGame, setCharacters]);
 
   function handleClick(e) {

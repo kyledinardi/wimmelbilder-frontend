@@ -1,6 +1,7 @@
 import { useOutletContext } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Dropdown from './Dropdown.jsx';
+import PopUp from './PopUp.jsx';
 import convention from '../img/convention.webp';
 import conventionHalf from '../img/convention-half.webp';
 import benson from '../img/benson.png';
@@ -9,26 +10,44 @@ import waylonSmithers from '../img/waylon-smithers.png';
 import styles from '../style/Game.module.css';
 
 function Convention() {
-  const [setIsGame, setCharacters, isGame] = useOutletContext();
-  const [inlineStyles, setInlineStyles] = useState({ display: 'none' });
+  const [setIsGame, setCharacters, setIsGameOver, isGame, characters] =
+    useOutletContext();
+
+  const [popUpCharacterName, setPopUpCharacterName] = useState('');
+  const [popUpVisible, setPopUpVisible] = useState(false);
+  const [popUpFound, setPopUpFound] = useState(false);
   const [coordinates, setCoordinates] = useState('');
 
-  const characters = useRef([
-    { name: 'Benson', img: benson },
-    { name: 'Kermit the Frog', img: kermitTheFrog },
-    { name: 'Waylon Smithers', img: waylonSmithers },
-  ]);
+  const [dropdownInlineStyles, setDropdownInlineStyles] = useState({
+    display: 'none',
+  });
+
+  const popUpTimer = useRef(null);
 
   useEffect(() => {
-    setIsGame(true);
-    setCharacters(characters.current);
     window.scrollTo(0, 0);
+    setIsGame(true);
+
+    setCharacters([
+      { name: 'Benson', img: benson },
+      { name: 'Kermit the Frog', img: kermitTheFrog },
+      { name: 'Waylon Smithers', img: waylonSmithers },
+    ]);
   }, [setIsGame, setCharacters]);
 
+  useEffect(() => {
+    if (characters) {
+      if (characters.every((character) => character.found)) {
+        setIsGameOver(true);
+      }
+    }
+  }, [characters, setIsGameOver]);
+
   function handleClick(e) {
-    const display = inlineStyles.display === 'none' ? 'block' : 'none';
+    const display = dropdownInlineStyles.display === 'none' ? 'block' : 'none';
     let x;
     let y;
+
     let top = null;
     let left = null;
     let bottom = null;
@@ -52,7 +71,20 @@ function Convention() {
     }
 
     setCoordinates(`${x} ${y}`);
-    setInlineStyles({ display, top, left, bottom, right });
+    setDropdownInlineStyles({ display, top, left, bottom, right });
+  }
+
+  function displayPopUp(characterName, found) {
+    if (found) {
+      setPopUpFound(true);
+    } else {
+      setPopUpFound(false);
+    }
+
+    setPopUpCharacterName(characterName);
+    setPopUpVisible(true);
+    clearTimeout(popUpTimer.current);
+    popUpTimer.current = setTimeout(() => setPopUpVisible(false), 3000);
   }
 
   if (isGame) {
@@ -68,10 +100,16 @@ function Convention() {
         />
         <Dropdown
           illustration='convention'
-          characters={characters.current}
-          inlineStyles={inlineStyles}
+          characters={characters}
+          setCharacters={(c) => setCharacters(c)}
+          inlineStyles={dropdownInlineStyles}
           coordinates={coordinates}
+          displayPopUp={displayPopUp}
+          setDropdownInlineStyles={setDropdownInlineStyles}
         />
+        {popUpVisible && (
+          <PopUp characterName={popUpCharacterName} found={popUpFound} />
+        )}
       </div>
     );
   }

@@ -1,0 +1,22 @@
+.popUp {
+  margin: auto;
+  width: max-content;
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.popUp p {
+  margin: 0;
+  color: white;
+}
+
+@media (min-width: 1200px) {
+  .popUp {
+    top: 90px;
+    bottom: auto;
+  }
+}

@@ -1,5 +1,5 @@
 import { useOutletContext } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Dropdown from './Dropdown.jsx';
 import cyberpunkCity from '../img/cyberpunk-city.webp';
 import cyberpunkCityHalf from '../img/cyberpunk-city-half.webp';
@@ -9,20 +9,19 @@ import tomCat from '../img/tom-cat.png';
 import styles from '../style/Game.module.css';
 
 function CyberpunkCity() {
-  const [setIsGame, setCharacters, isGame] = useOutletContext();
+  const [setIsGame, setCharacters, isGame, characters] = useOutletContext();
   const [inlineStyles, setInlineStyles] = useState({ display: 'none' });
   const [coordinates, setCoordinates] = useState('');
 
-  const characters = useRef([
-    { name: 'Batman', img: batman },
-    { name: 'Jabba the Hutt', img: jabbaTheHutt },
-    { name: 'Tom Cat', img: tomCat },
-  ]);
-
   useEffect(() => {
     setIsGame(true);
-    setCharacters(characters.current);
     window.scrollTo(0, 0);
+
+    setCharacters([
+      { name: 'Batman', img: batman },
+      { name: 'Jabba the Hutt', img: jabbaTheHutt },
+      { name: 'Tom Cat', img: tomCat },
+    ]);
   }, [setIsGame, setCharacters]);
 
   function handleClick(e) {

@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
 import styles from '../style/Dropdown.module.css';
 
-function Dropdown({ illustration, characters, inlineStyles, coordinates }) {
+function Dropdown({
+  illustration,
+  characters,
+  setCharacters,
+  inlineStyles,
+  coordinates,
+  displayPopUp,
+  setDropdownInlineStyles,
+}) {
   async function handleClick(e) {
     const selectedCoords = {
       x: parseInt(coordinates.split(' ')[0], 10),
@@ -20,25 +28,33 @@ function Dropdown({ illustration, characters, inlineStyles, coordinates }) {
     const response = await responseStream.json();
 
     if (response.found) {
-      console.log(`You found ${character}`);
-    } else {
-      console.log(`${character} is somewhere else`);
+      const newCharacters = characters.map((char) =>
+        char.name === character ? { ...char, found: true } : char,
+      );
+
+      setCharacters(newCharacters);
     }
+
+    setDropdownInlineStyles({ display: 'none' });
+    displayPopUp(character, !!response.found);
   }
 
   return (
     <div className={styles.dropdown} style={inlineStyles}>
-      {characters.map((character) => (
-        <button
-          onClick={(e) => handleClick(e)}
-          className={styles.character}
-          data-name={character.name}
-          key={character.name}
-        >
-          <img src={character.img} alt='' />
-          <p>{character.name}</p>
-        </button>
-      ))}
+      {characters.map(
+        (character) =>
+          !character.found && (
+            <button
+              onClick={(e) => handleClick(e)}
+              className={styles.character}
+              data-name={character.name}
+              key={character.name}
+            >
+              <img src={character.img} alt='' />
+              <p>{character.name}</p>
+            </button>
+          ),
+      )}
     </div>
   );
 }
@@ -46,8 +62,11 @@ function Dropdown({ illustration, characters, inlineStyles, coordinates }) {
 Dropdown.propTypes = {
   illustration: PropTypes.string,
   characters: PropTypes.array,
+  setCharacters: PropTypes.func,
   inlineStyles: PropTypes.object,
   coordinates: PropTypes.string,
+  displayPopUp: PropTypes.func,
+  setDropdownInlineStyles: PropTypes.func,
 };
 
 export default Dropdown;
