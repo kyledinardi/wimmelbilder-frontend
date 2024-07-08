@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Counter from './Counter.jsx';
 import styles from '../style/Nav.module.css';
 
-function Nav({ isGame, characters, isGameOver }) {
+function Nav({ isGame, characters, isGameOver, setTimerValue }) {
   return (
     <nav className={styles.navbar}>
       <Link className={styles.navLink} to='/'>
@@ -14,7 +14,10 @@ function Nav({ isGame, characters, isGameOver }) {
       </Link>
       {isGame && (
         <>
-          <Counter isGameOver={isGameOver} />
+          <Counter
+            isGameOver={isGameOver}
+            setTimerValue={(v) => setTimerValue(v)}
+          />
           {characters.map((character) => (
             <div
               className={
@@ -36,6 +39,7 @@ Nav.propTypes = {
   isGame: PropTypes.bool,
   characters: PropTypes.array,
   isGameOver: PropTypes.bool,
+  setTimerValue: PropTypes.func,
 };
 
 export default Nav;

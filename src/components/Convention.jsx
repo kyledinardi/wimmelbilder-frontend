@@ -2,6 +2,7 @@ import { useOutletContext } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import Dropdown from './Dropdown.jsx';
 import PopUp from './PopUp.jsx';
+import GameOver from './GameOver.jsx';
 import convention from '../img/convention.webp';
 import conventionHalf from '../img/convention-half.webp';
 import benson from '../img/benson.png';
@@ -10,8 +11,15 @@ import waylonSmithers from '../img/waylon-smithers.png';
 import styles from '../style/Game.module.css';
 
 function Convention() {
-  const [setIsGame, setCharacters, setIsGameOver, isGame, characters] =
-    useOutletContext();
+  const [
+    setIsGame,
+    setCharacters,
+    setIsGameOver,
+    isGame,
+    characters,
+    isGameOver,
+    timerValue,
+  ] = useOutletContext();
 
   const [popUpCharacterName, setPopUpCharacterName] = useState('');
   const [popUpVisible, setPopUpVisible] = useState(false);
@@ -30,8 +38,8 @@ function Convention() {
 
     setCharacters([
       { name: 'Benson', img: benson },
-      { name: 'Kermit the Frog', img: kermitTheFrog },
-      { name: 'Waylon Smithers', img: waylonSmithers },
+      { name: 'Kermit the Frog', img: kermitTheFrog  },
+      { name: 'Waylon Smithers', img: waylonSmithers  },
     ]);
   }, [setIsGame, setCharacters]);
 
@@ -125,6 +133,7 @@ function Convention() {
               ),
           )}
         </div>
+        {isGameOver && <GameOver timerValue={timerValue} />}
       </div>
     );
   }

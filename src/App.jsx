@@ -5,11 +5,17 @@ import Nav from './components/Nav.jsx';
 function App() {
   const [isGame, setIsGame] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
+  const [timerValue, setTimerValue] = useState('');
   const [characters, setCharacters] = useState(null);
 
   return (
     <>
-      <Nav isGame={isGame} characters={characters} isGameOver={isGameOver} />
+      <Nav
+        isGame={isGame}
+        characters={characters}
+        isGameOver={isGameOver}
+        setTimerValue={(v) => setTimerValue(v)}
+      />
       <main>
         <Outlet
           context={[
@@ -19,6 +25,7 @@ function App() {
             isGame,
             characters,
             isGameOver,
+            timerValue,
           ]}
         />
       </main>
