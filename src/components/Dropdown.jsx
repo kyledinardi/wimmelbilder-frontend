@@ -28,9 +28,18 @@ function Dropdown({
     const response = await responseStream.json();
 
     if (response.found) {
-      const newCharacters = characters.map((char) =>
-        char.name === character ? { ...char, found: true } : char,
-      );
+      const newCharacters = characters.map((char) => {
+        if (char.name === character) {
+          return {
+            ...char,
+            found: true,
+            x: selectedCoords.x,
+            y: selectedCoords.y,
+          };
+        }
+
+        return char;
+      });
 
       setCharacters(newCharacters);
     }

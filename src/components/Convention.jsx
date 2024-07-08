@@ -89,27 +89,42 @@ function Convention() {
 
   if (isGame) {
     return (
-      <div className={styles.illustrationContainer}>
-        <img
-          onClick={(e) => handleClick(e)}
-          className={styles.fullIllustration}
-          srcSet={`${conventionHalf} 1800w, ${convention} 3600w`}
-          sizes='(max-width: 600px) 1800px, 3600px'
-          src={convention}
-          alt='Convention'
-        />
-        <Dropdown
-          illustration='convention'
-          characters={characters}
-          setCharacters={(c) => setCharacters(c)}
-          inlineStyles={dropdownInlineStyles}
-          coordinates={coordinates}
-          displayPopUp={displayPopUp}
-          setDropdownInlineStyles={setDropdownInlineStyles}
-        />
-        {popUpVisible && (
-          <PopUp characterName={popUpCharacterName} found={popUpFound} />
-        )}
+      <div className={styles.externalContainer}>
+        <div className={styles.internalContainer}>
+          <img
+            onClick={(e) => handleClick(e)}
+            className={styles.fullIllustration}
+            srcSet={`${conventionHalf} 1800w, ${convention} 3600w`}
+            sizes='(max-width: 600px) 1800px, 3600px'
+            src={convention}
+            alt='Convention'
+          />
+          <Dropdown
+            illustration='convention'
+            characters={characters}
+            setCharacters={(c) => setCharacters(c)}
+            inlineStyles={dropdownInlineStyles}
+            coordinates={coordinates}
+            displayPopUp={displayPopUp}
+            setDropdownInlineStyles={setDropdownInlineStyles}
+          />
+          {popUpVisible && (
+            <PopUp characterName={popUpCharacterName} found={popUpFound} />
+          )}
+          {characters.map(
+            (character) =>
+              character.found && (
+                <div
+                  key={character.name}
+                  className={styles.foundCircle}
+                  style={{
+                    left: `calc((100% / 3600 * ${character.x} - 50px))`,
+                    top: `calc((100% / 2544 * ${character.y} - 50px))`,
+                  }}
+                ></div>
+              ),
+          )}
+        </div>
       </div>
     );
   }

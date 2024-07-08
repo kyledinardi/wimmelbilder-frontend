@@ -1,5 +1,11 @@
-.illustrationContainer {
+.externalContainer {
   overflow: auto;
+  position: relative;
+}
+
+.internalContainer {
+  width: max-content;
+  height: max-content;
   position: relative;
 }
 
@@ -9,7 +15,16 @@
   cursor: crosshair;
 }
 
+.foundCircle {
+  position: absolute;
+  border: 5px solid red;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+}
+
 @media (min-width: 1200px) {
+  .internalContainer,
   .fullIllustration {
     max-width: 100%;
   }
