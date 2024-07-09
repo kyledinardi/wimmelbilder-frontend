@@ -1,8 +1,28 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import styles from '../style/GameOver.module.css';
 
 function GameOver({ timerValue }) {
-  function submitHighScore(e) {}
+  const [inputDisplayed, setInputDisplayed] = useState(true);
+
+  async function submitHighScore(e) {
+    e.preventDefault();
+
+    const responseStream = await fetch(`http://localhost:3000/high-scores`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: e.target[0].value, timerValue }),
+    }).catch((err) => {
+      throw new Error(err);
+    });
+
+    await responseStream.json().catch((err) => {
+      throw new Error(err);
+    });
+
+    setInputDisplayed(false);
+  }
 
   return (
     <form className={styles.gameOverForm} onSubmit={(e) => submitHighScore(e)}>
@@ -10,9 +30,13 @@ function GameOver({ timerValue }) {
       <h3>
         You found every character in <span>{timerValue}</span>
       </h3>
-      <p>Enter your name to save your score</p>
-      <input type='text' name='score' id='score' />
-      <button>Submit</button>
+      {inputDisplayed && (
+        <>
+          <p>Enter your name to save your score</p>
+          <input type='text' name='name' id='name' required />
+          <button>Submit</button>
+        </>
+      )}
     </form>
   );
 }
