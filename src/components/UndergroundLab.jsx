@@ -20,6 +20,7 @@ function UndergroundLab() {
 
   useEffect(() => {
     setIsGame(true);
+    setIsGameOver(false);
     window.scrollTo(0, 0);
 
     setCharacters([
@@ -27,7 +28,7 @@ function UndergroundLab() {
       { name: 'R2D2', img: r2d2 },
       { name: 'Waldo', img: waldo },
     ]);
-  }, [setIsGame, setCharacters]);
+  }, [setIsGame, setIsGameOver, setCharacters]);
 
   if (isGame) {
     return (

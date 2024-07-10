@@ -1,0 +1,36 @@
+.buttons {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 30px;
+}
+
+.buttons button {
+  padding: 10px;
+  background-color: #444554;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.buttons img {
+  max-height: 300px;
+  border-radius: 10px;
+}
+
+.highScorePage h2 {
+  text-align: center;
+}
+
+.scoreList {
+  width: max-content;
+  margin: auto;
+  border-collapse: collapse;
+  padding: 20px;
+}
+
+.scoreList th,
+.scoreList td {
+  padding: 10px;
+  border: 1px solid black;
+}

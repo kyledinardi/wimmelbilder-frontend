@@ -121,7 +121,9 @@ function Game({
             ),
         )}
       </div>
-      {isGameOver && <GameOver timerValue={timerValue} />}
+      {isGameOver && (
+        <GameOver timerValue={timerValue} illustration={imageObj.name} />
+      )}
     </div>
   );
 }

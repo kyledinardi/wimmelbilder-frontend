@@ -21,13 +21,14 @@ function Convention() {
   useEffect(() => {
     window.scrollTo(0, 0);
     setIsGame(true);
+    setIsGameOver(false);
 
     setCharacters([
       { name: 'Benson', img: benson },
       { name: 'Kermit the Frog', img: kermitTheFrog },
       { name: 'Waylon Smithers', img: waylonSmithers },
     ]);
-  }, [setIsGame, setCharacters]);
+  }, [setIsGame, setIsGameOver, setCharacters]);
 
   if (isGame) {
     return (

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import styles from '../style/GameOver.module.css';
 
-function GameOver({ timerValue }) {
+function GameOver({ timerValue, illustration }) {
   const [inputDisplayed, setInputDisplayed] = useState(true);
 
   async function submitHighScore(e) {
@@ -12,7 +12,12 @@ function GameOver({ timerValue }) {
       method: 'POST',
       mode: 'cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: e.target[0].value, timerValue }),
+      body: JSON.stringify({
+        name: e.target[0].value,
+        date: Date.now(),
+        timerValue,
+        illustration,
+      }),
     }).catch((err) => {
       throw new Error(err);
     });
@@ -43,6 +48,7 @@ function GameOver({ timerValue }) {
 
 GameOver.propTypes = {
   timerValue: PropTypes.string,
+  illustration: PropTypes.string,
 };
 
 export default GameOver;

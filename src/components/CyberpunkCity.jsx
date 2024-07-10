@@ -20,6 +20,7 @@ function CyberpunkCity() {
 
   useEffect(() => {
     setIsGame(true);
+    setIsGameOver(false);
     window.scrollTo(0, 0);
 
     setCharacters([
@@ -27,7 +28,7 @@ function CyberpunkCity() {
       { name: 'Jabba the Hutt', img: jabbaTheHutt },
       { name: 'Tom Cat', img: tomCat },
     ]);
-  }, [setIsGame, setCharacters]);
+  }, [setIsGame, setIsGameOver, setCharacters]);
 
   if (isGame) {
     return (
