@@ -18,12 +18,15 @@ function Dropdown({
 
     const character = e.currentTarget.dataset.name;
 
-    const responseStream = await fetch('http://localhost:3000/characters', {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ selectedCoords, character, illustration }),
-    });
+    const responseStream = await fetch(
+      'https://odin-wheres-waldo-backend.fly.dev/characters',
+      {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ selectedCoords, character, illustration }),
+      },
+    );
 
     const response = await responseStream.json();
 

@@ -9,7 +9,9 @@ function HighScores() {
   const [currentIllustration, setCurrentIllustration] = useState('convention');
 
   useEffect(() => {
-    fetch('http://localhost:3000/high-scores', { mode: 'cors' })
+    fetch('https://odin-wheres-waldo-backend.fly.dev/high-scores', {
+      mode: 'cors',
+    })
       .then((response) => response.json())
       .then((response) => {
         const newHighScores = {};

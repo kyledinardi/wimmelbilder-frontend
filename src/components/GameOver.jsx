@@ -8,17 +8,20 @@ function GameOver({ timerValue, illustration }) {
   async function submitHighScore(e) {
     e.preventDefault();
 
-    const responseStream = await fetch(`http://localhost:3000/high-scores`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: e.target[0].value,
-        date: Date.now(),
-        timerValue,
-        illustration,
-      }),
-    }).catch((err) => {
+    const responseStream = await fetch(
+      `https://odin-wheres-waldo-backend.fly.dev/high-scores`,
+      {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: e.target[0].value,
+          date: Date.now(),
+          timerValue,
+          illustration,
+        }),
+      },
+    ).catch((err) => {
       throw new Error(err);
     });
 
