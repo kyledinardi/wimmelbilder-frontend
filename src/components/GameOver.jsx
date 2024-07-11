@@ -38,7 +38,7 @@ function GameOver({ timerValue, illustration }) {
       {inputDisplayed && (
         <>
           <p>Enter your name to save your score</p>
-          <input type='text' name='name' id='name' required />
+          <input type='text' name='name' id='name' maxLength='31' required />
           <button>Submit</button>
         </>
       )}

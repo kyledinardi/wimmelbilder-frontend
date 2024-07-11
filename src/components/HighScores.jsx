@@ -40,6 +40,11 @@ function HighScores() {
     }
   }
 
+  function unEscape(name) {
+    const doc = new DOMParser().parseFromString(name, 'text/html');
+    return doc.documentElement.textContent;
+  }
+
   return (
     <div className={styles.highScorePage}>
       <h1>High Scores</h1>
@@ -57,7 +62,7 @@ function HighScores() {
       {!highScores ? (
         <h2>Loading High Scores...</h2>
       ) : (
-        <>
+        <div className={styles.scoreSection}>
           <h2>{unCamelCaseName(currentIllustration)}</h2>
           <table className={styles.scoreList}>
             <thead>
@@ -72,14 +77,14 @@ function HighScores() {
               {highScores[currentIllustration].map((highScore, index) => (
                 <tr key={highScore._id}>
                   <th scope='row'>{index + 1}</th>
-                  <td>{highScore.name}</td>
+                  <td>{unEscape(highScore.name)}</td>
                   <td>{highScore.score}</td>
                   <td>{new Date(highScore.date).toLocaleDateString()}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </>
+        </div>
       )}
     </div>
   );
