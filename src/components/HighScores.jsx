@@ -9,7 +9,7 @@ function HighScores() {
   const [currentIllustration, setCurrentIllustration] = useState('convention');
 
   useEffect(() => {
-    fetch('http://localhost:3000/high-scores', {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/high-scores`, {
       mode: 'cors',
     })
       .then((response) => response.json())

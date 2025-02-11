@@ -19,8 +19,8 @@ function Dropdown({
     const character = e.currentTarget.dataset.name;
 
     const responseStream = await fetch(
-      'http://localhost:3000/characters',
-      
+      `${import.meta.env.VITE_BACKEND_URL}/characters`,
+
       {
         method: 'POST',
         mode: 'cors',

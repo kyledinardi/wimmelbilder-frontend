@@ -9,8 +9,8 @@ function GameOver({ timerValue, illustration }) {
     e.preventDefault();
 
     const responseStream = await fetch(
-      `http://localhost:3000/high-scores`,
-      
+      `${import.meta.env.VITE_BACKEND_URL}/high-scores`,
+
       {
         method: 'POST',
         mode: 'cors',
@@ -21,7 +21,7 @@ function GameOver({ timerValue, illustration }) {
           illustration,
         }),
       },
-    )
+    );
 
     await responseStream.json().catch((err) => {
       throw new Error(err);
