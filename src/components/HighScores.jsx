@@ -9,7 +9,7 @@ function HighScores() {
   const [currentIllustration, setCurrentIllustration] = useState('convention');
 
   useEffect(() => {
-    fetch('https://odin-wheres-waldo-backend.fly.dev/high-scores', {
+    fetch('http://localhost:3000/high-scores', {
       mode: 'cors',
     })
       .then((response) => response.json())
@@ -33,10 +33,13 @@ function HighScores() {
     switch (illustrationName) {
       case 'convention':
         return 'Convention';
+
       case 'cyberpunkCity':
         return 'Cyberpunk City';
+
       case 'undergroundLab':
         return 'Underground Lab';
+
       default:
         return null;
     }
@@ -77,7 +80,7 @@ function HighScores() {
             </thead>
             <tbody>
               {highScores[currentIllustration].map((highScore, index) => (
-                <tr key={highScore._id}>
+                <tr key={highScore.id}>
                   <th scope='row'>{index + 1}</th>
                   <td>{unEscape(highScore.name)}</td>
                   <td>{highScore.score}</td>

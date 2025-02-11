@@ -9,21 +9,19 @@ function GameOver({ timerValue, illustration }) {
     e.preventDefault();
 
     const responseStream = await fetch(
-      `https://odin-wheres-waldo-backend.fly.dev/high-scores`,
+      `http://localhost:3000/high-scores`,
+      
       {
         method: 'POST',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: e.target[0].value,
-          date: Date.now(),
           timerValue,
           illustration,
         }),
       },
-    ).catch((err) => {
-      throw new Error(err);
-    });
+    )
 
     await responseStream.json().catch((err) => {
       throw new Error(err);

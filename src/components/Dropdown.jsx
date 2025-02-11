@@ -19,7 +19,8 @@ function Dropdown({
     const character = e.currentTarget.dataset.name;
 
     const responseStream = await fetch(
-      'https://odin-wheres-waldo-backend.fly.dev/characters',
+      'http://localhost:3000/characters',
+      
       {
         method: 'POST',
         mode: 'cors',
