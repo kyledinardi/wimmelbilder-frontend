@@ -13,11 +13,11 @@ function HighScores() {
       mode: 'cors',
     })
       .then((response) => response.json())
+
       .then((response) => {
         const newHighScores = {};
-        const { scoreList } = response;
 
-        scoreList.forEach((highScore) => {
+        response.highScores.forEach((highScore) => {
           if (!newHighScores[highScore.illustration]) {
             newHighScores[highScore.illustration] = [highScore];
           } else {
@@ -29,25 +29,10 @@ function HighScores() {
       });
   }, []);
 
-  function unCamelCaseName(illustrationName) {
-    switch (illustrationName) {
-      case 'convention':
-        return 'Convention';
-
-      case 'cyberpunkCity':
-        return 'Cyberpunk City';
-
-      case 'undergroundLab':
-        return 'Underground Lab';
-
-      default:
-        return null;
-    }
-  }
-
-  function unEscape(name) {
-    const doc = new DOMParser().parseFromString(name, 'text/html');
-    return doc.documentElement.textContent;
+  function unCamelCase(illustrationName) {
+    return illustrationName
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/^./, (str) => str.toUpperCase());
   }
 
   return (
@@ -68,7 +53,7 @@ function HighScores() {
         <h2>Loading High Scores...</h2>
       ) : (
         <div className={styles.scoreSection}>
-          <h2>{unCamelCaseName(currentIllustration)}</h2>
+          <h2>{unCamelCase(currentIllustration)}</h2>
           <table className={styles.scoreList}>
             <thead>
               <tr>
@@ -79,14 +64,20 @@ function HighScores() {
               </tr>
             </thead>
             <tbody>
-              {highScores[currentIllustration].map((highScore, index) => (
-                <tr key={highScore.id}>
-                  <th scope='row'>{index + 1}</th>
-                  <td>{unEscape(highScore.name)}</td>
-                  <td>{highScore.score}</td>
-                  <td>{new Date(highScore.date).toLocaleDateString()}</td>
+              {!highScores[currentIllustration] ? (
+                <tr>
+                  <td colSpan='100%'>No high scores yet</td>
                 </tr>
-              ))}
+              ) : (
+                highScores[currentIllustration].map((highScore, i) => (
+                  <tr key={highScore.id}>
+                    <th scope='row'>{i + 1}</th>
+                    <td>{highScore.name}</td>
+                    <td>{highScore.score}</td>
+                    <td>{new Date(highScore.date).toLocaleDateString()}</td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

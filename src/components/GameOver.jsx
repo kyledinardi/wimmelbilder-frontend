@@ -8,7 +8,7 @@ function GameOver({ timerValue, illustration }) {
   async function submitHighScore(e) {
     e.preventDefault();
 
-    const responseStream = await fetch(
+    await fetch(
       `${import.meta.env.VITE_BACKEND_URL}/high-scores`,
 
       {
@@ -17,15 +17,11 @@ function GameOver({ timerValue, illustration }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: e.target[0].value,
-          timerValue,
+          score: timerValue,
           illustration,
         }),
       },
     );
-
-    await responseStream.json().catch((err) => {
-      throw new Error(err);
-    });
 
     setInputDisplayed(false);
   }

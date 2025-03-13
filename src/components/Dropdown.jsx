@@ -11,45 +11,31 @@ function Dropdown({
   setDropdownInlineStyles,
 }) {
   async function handleClick(e) {
-    const selectedCoords = {
-      x: parseInt(coordinates.split(' ')[0], 10),
-      y: parseInt(coordinates.split(' ')[1], 10),
-    };
-
-    const character = e.currentTarget.dataset.name;
+    const [x, y] = coordinates.split(' ').map(Number);
+    const charName = e.currentTarget.dataset.name;
 
     const responseStream = await fetch(
-      `${import.meta.env.VITE_BACKEND_URL}/characters`,
-
-      {
-        method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ selectedCoords, character, illustration }),
-      },
+      `${
+        import.meta.env.VITE_BACKEND_URL
+      }/characters?name=${charName}&illustration=${illustration}&x=${x}&y=${y}`,
     );
 
     const response = await responseStream.json();
 
     if (response.found) {
-      const newCharacters = characters.map((char) => {
-        if (char.name === character) {
-          return {
-            ...char,
-            found: true,
-            x: selectedCoords.x,
-            y: selectedCoords.y,
-          };
+      const newCharacters = characters.map((character) => {
+        if (character.name === charName) {
+          return { ...character, x, y, found: true };
         }
 
-        return char;
+        return character;
       });
 
       setCharacters(newCharacters);
     }
 
     setDropdownInlineStyles({ display: 'none' });
-    displayPopUp(character, !!response.found);
+    displayPopUp(charName, response.found);
   }
 
   return (
