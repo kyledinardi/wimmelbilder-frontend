@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 import Game from './Game.jsx';
 import undergroundLab from '../img/underground-lab.webp';
 import undergroundLabHalf from '../img/underground-lab-half.webp';
-import godzilla from '../img/godzilla.png';
-import r2d2 from '../img/r2d2.png';
-import waldo from '../img/waldo.png';
+import godzilla from '../img/godzilla.webp';
+import r2d2 from '../img/r2d2.webp';
+import waldo from '../img/waldo.webp';
 
 function UndergroundLab() {
   const [

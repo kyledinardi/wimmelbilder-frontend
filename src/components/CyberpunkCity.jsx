@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 import Game from './Game.jsx';
 import cyberpunkCity from '../img/cyberpunk-city.webp';
 import cyberpunkCityHalf from '../img/cyberpunk-city-half.webp';
-import batman from '../img/batman.png';
-import jabbaTheHutt from '../img/jabba-the-hutt.png';
-import tomCat from '../img/tom-cat.png';
+import batman from '../img/batman.webp';
+import jabbaTheHutt from '../img/jabba-the-hutt.webp';
+import tomCat from '../img/tom-cat.webp';
 
 function CyberpunkCity() {
   const [

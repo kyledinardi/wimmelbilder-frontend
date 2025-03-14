@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 import Game from './Game.jsx';
 import convention from '../img/convention.webp';
 import conventionHalf from '../img/convention-half.webp';
-import benson from '../img/benson.png';
-import kermitTheFrog from '../img/kermit-the-frog.png';
-import waylonSmithers from '../img/waylon-smithers.png';
+import benson from '../img/benson.webp';
+import kermitTheFrog from '../img/kermit-the-frog.webp';
+import waylonSmithers from '../img/waylon-smithers.webp';
 
 function Convention() {
   const [
