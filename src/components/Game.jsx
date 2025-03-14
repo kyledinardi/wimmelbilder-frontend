@@ -80,7 +80,7 @@ function Game({
           srcSet={`${imageObj.half} ${imageObj.width / 2}w, ${imageObj.full} ${
             imageObj.width
           }w`}
-          sizes={`(max-width: 600px) ${imageObj.width / 2}px, ${
+          sizes={`(max-width: 1200px) ${imageObj.width / 2}px, ${
             imageObj.width
           }px`}
           src={imageObj.full}
