@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Nav from './components/Nav.jsx';
+import Footer from './components/Footer.jsx';
 
 function App() {
   const [isGame, setIsGame] = useState(false);
@@ -29,6 +30,7 @@ function App() {
           ]}
         />
       </main>
+      <Footer />
     </>
   );
 }
