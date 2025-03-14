@@ -18,10 +18,7 @@ function Game({
   const [popUpVisible, setPopUpVisible] = useState(false);
   const [popUpFound, setPopUpFound] = useState(false);
   const [coordinates, setCoordinates] = useState('');
-
-  const [dropdownInlineStyles, setDropdownInlineStyles] = useState({
-    display: 'none',
-  });
+  const [dropdownStyles, setDropdownStyles] = useState({ display: 'none' });
 
   const popUpTimer = useRef(null);
 
@@ -34,46 +31,40 @@ function Game({
   }, [characters, setIsGameOver]);
 
   function handleClick(e) {
-    const display = dropdownInlineStyles.display === 'none' ? 'block' : 'none';
+    const display = dropdownStyles.display === 'none' ? 'block' : 'none';
+    const { offsetX, offsetY } = e.nativeEvent;
+    const { width, height } = e.target;
     let x;
     let y;
 
-    let top = null;
-    let left = null;
-    let bottom = null;
-    let right = null;
+    let left;
+    let right;
+    let top;
+    let bottom;
 
     if (display === 'block') {
-      x = Math.round((e.nativeEvent.offsetX / e.target.width) * imageObj.width);
+      x = Math.round((offsetX / width) * imageObj.width);
+      y = Math.round((offsetY / height) * imageObj.height);
 
-      y = Math.round(
-        (e.nativeEvent.offsetY / e.target.height) * imageObj.height,
-      );
-
-      if (e.nativeEvent.offsetX > e.target.width - dropdownDimensions.width) {
-        right = e.target.width - e.nativeEvent.offsetX;
+      if (offsetX > width - dropdownDimensions.width) {
+        right = width - offsetX;
       } else {
-        left = e.nativeEvent.offsetX;
+        left = offsetX;
       }
 
-      if (e.nativeEvent.offsetY > e.target.height - dropdownDimensions.height) {
-        bottom = e.target.height - e.nativeEvent.offsetY;
+      if (offsetY > height - dropdownDimensions.height) {
+        bottom = height - offsetY;
       } else {
-        top = e.nativeEvent.offsetY;
+        top = offsetY;
       }
     }
 
     setCoordinates(`${x} ${y}`);
-    setDropdownInlineStyles({ display, top, left, bottom, right });
+    setDropdownStyles({ display, top, left, bottom, right });
   }
 
-  function displayPopUp(characterName, found) {
-    if (found) {
-      setPopUpFound(true);
-    } else {
-      setPopUpFound(false);
-    }
-
+  function displayPopUp(characterName, isFound) {
+    setPopUpFound(isFound);
     setPopUpCharacterName(characterName);
     setPopUpVisible(true);
     clearTimeout(popUpTimer.current);
@@ -99,10 +90,10 @@ function Game({
           illustration={imageObj.name}
           characters={characters}
           setCharacters={(c) => setCharacters(c)}
-          inlineStyles={dropdownInlineStyles}
+          inlineStyles={dropdownStyles}
           coordinates={coordinates}
-          displayPopUp={displayPopUp}
-          setDropdownInlineStyles={setDropdownInlineStyles}
+          displayPopUp={(c, f) => displayPopUp(c, f)}
+          setDropdownInlineStyles={(s) => setDropdownStyles(s)}
         />
         {popUpVisible && (
           <PopUp characterName={popUpCharacterName} found={popUpFound} />
