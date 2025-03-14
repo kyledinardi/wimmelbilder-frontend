@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import conventionHalf from '../img/convention-half.webp';
 import cyberpunkCityHalf from '../img/cyberpunk-city-half.webp';
 import undergroundLabHalf from '../img/underground-lab-half.webp';
@@ -7,6 +8,7 @@ import styles from '../style/HighScores.module.css';
 function HighScores() {
   const [highScores, setHighScores] = useState(null);
   const [currentIllustration, setCurrentIllustration] = useState('convention');
+  const [setIsGame] = useOutletContext();
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/high-scores`, {
@@ -28,6 +30,10 @@ function HighScores() {
         setHighScores(newHighScores);
       });
   }, []);
+
+  useEffect(() => {
+    setIsGame(false);
+  }, [setIsGame]);
 
   function unCamelCase(illustrationName) {
     return illustrationName
